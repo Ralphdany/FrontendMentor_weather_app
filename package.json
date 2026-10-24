@@ -1,0 +1,28 @@
+{
+  "name": "weather-app-main",
+  "version": "1.0.0",
+  "description": "![Design preview for the Weather app coding challenge](./preview.jpg)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ralphdany/FrontendMentor_weather_app.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Ralphdany/FrontendMentor_weather_app/issues"
+  },
+  "homepage": "https://github.com/Ralphdany/FrontendMentor_weather_app#readme",
+  "devDependencies": {
+    "typescript": "^7.0.2",
+    "vite": "^8.3.5"
+  }
+}
