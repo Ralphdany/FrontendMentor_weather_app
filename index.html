@@ -1,66 +1,262 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
-
-  <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png">
-  
-  <title>Frontend Mentor | Weather app</title>
-
-  <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
-  <style>
-    .attribution { font-size: 0.6875rem; text-align: center; }
-    .attribution a { color: hsl(228, 45%, 44%); }
-  </style>
-</head>
-<body>
-
-  Units
-
-  Switch to Imperial/Metric
-
-  Temperature
-
-  Celsius (°C)
-  Fahrenheit (°F)
-
-  Wind Speed
-
-  km/h
-  mph
-
-  Precipitation
-
-  Millimeters (mm)
-  Inches (in)
-
-  How's the sky looking today?
-
-  Search for a city, e.g., New York
-  Search
-
-  Feels like
-  <!-- Insert temperature here -->
-
-  Humidity
-  <!-- Insert humidity here -->
-
-  Wind
-  <!-- Insert wind here -->   
-  
-  Precipitation
-  <!-- Insert precipitation here -->
-
-  Daily forecast
-  <!-- Insert daily forecast for the next 7 days here -->
-
-  Hourly forecast
-  <!-- Insert hourly forecast for the selected day here -->
-
-  <footer class="attribution">
-    Challenge by <a href="https://www.frontendmentor.io?ref=challenge">Frontend Mentor</a>. 
-    Coded by <a href="#">Your Name Here</a>.
-  </footer>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="/assets/images/favicon-32x32.png"
+    />
+    <link rel="stylesheet" href="/src/styles.css" />
+    <title>Weather Now</title>
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="site-header">
+        <div class="site-nav">
+          <a href="/" aria-label="Weather Now home"
+            ><img src="/assets/images/logo.svg" alt="Weather Now"
+          /></a>
+          <div class="units-control">
+            <button
+              type="button"
+              aria-expanded="false"
+              aria-controls="units-menu"
+            >
+              <img src="/assets/images/icon-units.svg" alt="" /><span
+                >Units</span
+              ><img src="/assets/images/icon-dropdown.svg" alt="" />
+            </button>
+            <div id="units-menu" hidden>
+              <p>Switch to Imperial</p>
+              <div role="group" aria-labelledby="temperature-label">
+                <p id="temperature-label">Temperature</p>
+                <button type="button">Celsius (°C)</button
+                ><button type="button">Fahrenheit (°F)</button>
+              </div>
+              <div role="group" aria-labelledby="wind-label">
+                <p id="wind-label">Wind speed</p>
+                <button type="button">km/h</button
+                ><button type="button">mph</button>
+              </div>
+              <div role="group" aria-labelledby="precipitation-label">
+                <p id="precipitation-label">Precipitation</p>
+                <button type="button">Millimeters (mm)</button
+                ><button type="button">Inches (in)</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </header>
+      <main class="weather-app">
+        <h1 class="page-title">How's the sky looking today?</h1>
+        <form class="search-form" role="search">
+          <div class="search-form__field">
+            <input
+              id="location-search"
+              name="location"
+              type="search"
+              autocomplete="off"
+              aria-label="Search for a place"
+              placeholder="Search for a place…"
+            /><img src="/assets/images/icon-search.svg" alt="" />
+          </div>
+          <button type="submit">Search</button>
+          <div class="search-status" role="status" hidden>
+            <img src="/assets/images/icon-loading.svg" alt="" />
+            <span>Search in progress</span>
+          </div>
+        </form>
+        <div class="weather-dashboard">
+          <div class="weather-dashboard__primary">
+            <section class="current-weather" aria-label="Current weather">
+              <div class="current-weather__hero">
+                <picture class="current-weather__artwork">
+                  <source
+                    srcset="/assets/images/bg-today-small.svg"
+                    media="(max-width: 48rem)"
+                  />
+                  <img src="/assets/images/bg-today-large.svg" alt="" />
+                </picture>
+                <div class="current-weather__location">
+                  <p class="current-weather__city">Berlin, Germany</p>
+                  <p class="current-weather__date">Tuesday, Aug 5, 2025</p>
+                </div>
+                <div class="current-weather__conditions">
+                  <img src="/assets/images/icon-sunny.webp" alt="Sunny" />
+                  <p>20°</p>
+                </div>
+                <div
+                  class="weather-state weather-state--loading"
+                  role="status"
+                  hidden
+                >
+                  <img src="/assets/images/icon-loading.svg" alt="" />
+                  <p>Loading…</p>
+                </div>
+              </div>
+              <dl class="weather-metrics">
+                <div class="weather-metric">
+                  <dt>Feels like</dt>
+                  <dd>18°</dd>
+                </div>
+                <div class="weather-metric">
+                  <dt>Humidity</dt>
+                  <dd>46%</dd>
+                </div>
+                <div class="weather-metric">
+                  <dt>Wind</dt>
+                  <dd>14 km/h</dd>
+                </div>
+                <div class="weather-metric">
+                  <dt>Precipitation</dt>
+                  <dd>0 mm</dd>
+                </div>
+              </dl>
+            </section>
+            <section class="daily-forecast" aria-labelledby="daily-heading">
+              <h2 class="section-title" id="daily-heading">Daily forecast</h2>
+              <ul class="daily-forecast__list">
+                <li class="daily-forecast__item">
+                  <span>Tue</span
+                  ><img src="/assets/images/icon-rain.webp" alt="Rain" /><span
+                    >20°</span
+                  ><span>14°</span>
+                </li>
+                <li class="daily-forecast__item">
+                  <span>Wed</span
+                  ><img
+                    src="/assets/images/icon-drizzle.webp"
+                    alt="Drizzle"
+                  /><span>21°</span><span>15°</span>
+                </li>
+                <li class="daily-forecast__item">
+                  <span>Thu</span
+                  ><img src="/assets/images/icon-sunny.webp" alt="Sunny" /><span
+                    >24°</span
+                  ><span>14°</span>
+                </li>
+                <li class="daily-forecast__item">
+                  <span>Fri</span
+                  ><img
+                    src="/assets/images/icon-partly-cloudy.webp"
+                    alt="Partly cloudy"
+                  /><span>25°</span><span>13°</span>
+                </li>
+                <li class="daily-forecast__item">
+                  <span>Sat</span
+                  ><img src="/assets/images/icon-storm.webp" alt="Storm" /><span
+                    >21°</span
+                  ><span>15°</span>
+                </li>
+                <li class="daily-forecast__item">
+                  <span>Sun</span
+                  ><img src="/assets/images/icon-snow.webp" alt="Snow" /><span
+                    >25°</span
+                  ><span>16°</span>
+                </li>
+                <li class="daily-forecast__item">
+                  <span>Mon</span
+                  ><img src="/assets/images/icon-fog.webp" alt="Fog" /><span
+                    >24°</span
+                  ><span>15°</span>
+                </li>
+              </ul>
+            </section>
+          </div>
+          <section class="hourly-forecast" aria-labelledby="hourly-heading">
+            <div class="hourly-forecast__header">
+              <h2 class="section-title" id="hourly-heading">Hourly forecast</h2>
+              <div class="day-control">
+                <button
+                  type="button"
+                  aria-expanded="false"
+                  aria-controls="day-menu"
+                >
+                  Tuesday<img src="/assets/images/icon-dropdown.svg" alt="" />
+                </button>
+                <ul class="day-menu" id="day-menu" hidden>
+                  <li><button type="button">Monday</button></li>
+                  <li><button type="button">Tuesday</button></li>
+                  <li><button type="button">Wednesday</button></li>
+                  <li><button type="button">Thursday</button></li>
+                  <li><button type="button">Friday</button></li>
+                  <li><button type="button">Saturday</button></li>
+                  <li><button type="button">Sunday</button></li>
+                </ul>
+              </div>
+            </div>
+            <ul class="hourly-forecast__list">
+              <li class="hourly-forecast__item">
+                <img
+                  src="/assets/images/icon-overcast.webp"
+                  alt="Overcast"
+                /><span>3 PM</span><span>20°</span>
+              </li>
+              <li class="hourly-forecast__item">
+                <img
+                  src="/assets/images/icon-partly-cloudy.webp"
+                  alt="Partly cloudy"
+                /><span>4 PM</span><span>20°</span>
+              </li>
+              <li class="hourly-forecast__item">
+                <img src="/assets/images/icon-sunny.webp" alt="Sunny" /><span
+                  >5 PM</span
+                ><span>20°</span>
+              </li>
+              <li class="hourly-forecast__item">
+                <img
+                  src="/assets/images/icon-overcast.webp"
+                  alt="Overcast"
+                /><span>6 PM</span><span>19°</span>
+              </li>
+              <li class="hourly-forecast__item">
+                <img src="/assets/images/icon-rain.webp" alt="Rain" /><span
+                  >7 PM</span
+                ><span>18°</span>
+              </li>
+              <li class="hourly-forecast__item">
+                <img src="/assets/images/icon-fog.webp" alt="Fog" /><span
+                  >8 PM</span
+                ><span>18°</span>
+              </li>
+              <li class="hourly-forecast__item">
+                <img src="/assets/images/icon-rain.webp" alt="Rain" /><span
+                  >9 PM</span
+                ><span>17°</span>
+              </li>
+              <li class="hourly-forecast__item">
+                <img
+                  src="/assets/images/icon-overcast.webp"
+                  alt="Overcast"
+                /><span>10 PM</span><span>17°</span>
+              </li>
+            </ul>
+          </section>
+        </div>
+        <div class="weather-state weather-state--empty" role="status" hidden>
+          <h2>No search result found!</h2>
+        </div>
+        <div class="weather-state weather-state--error" role="alert" hidden>
+          <img src="/assets/images/icon-error.svg" alt="" />
+          <h1>Something went wrong</h1>
+          <p>
+            We couldn't connect to the server (API error). Please try again in a
+            few moments.
+          </p>
+          <button type="button">
+            <img src="/assets/images/icon-retry.svg" alt="" />Retry
+          </button>
+        </div>
+      </main>
+    </div>
+    <footer class="attribution">
+      Challenge by
+      <a href="https://www.frontendmentor.io?ref=challenge">Frontend Mentor</a>.
+      Coded by <a href="#">Your Name Here</a>.
+    </footer>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
 </html>
